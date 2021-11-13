@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   libros
+{% endblock %}
+
+{% block content %}
+
+   
+<div class="container">
+    <div class="row">
+      <div class="col">
+
+    <div class="row book-container">
+        <div class="col-sm-4">
+            <img src="http://covers.openlibrary.org/b/isbn/{{infolibro[0]['isbn']}}-M.jpg" width="130px">    
+        </div>
+        <div class="col-sm-4">
+            <h1>  titulo {{infolibro[0]['title']}}</h1>
+            <h5>  Autor {{infolibro[0]['author' ]}}</h5>
+            <h5>  año publicado {{infolibro[0]['year']}}</h5>
+            <h5>  isbn {{infolibro[0]['isbn']}}</h5>
+        </div>
+
+        <div class="col-sm-4">
+            <img class="mb-3" src="../static/goodreads.jpg" alt="Goodreads" width="200" height="45">
+            <h5>Numero de calificacion {{infolibro[1]['work_ratings_count']}}</h5>
+            <h5>Average calificacion  {{infolibro[1]['average_rating']}}</h5>
+            <h5>
+                <a href="https://www.goodreads.com/search?q={{infolibro[0]['title']}}">Goodreads page</a>
+            </h5>
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <h4 class="alert alert-warning">reseñas de los usuarios </h4>
+    <h3>hace tu propia reseña </h3>
+
+         <div>
+        {% if not yaComentado %}
+        <form method="POST" class="form-border">
+            <div class="form-row">
+                <div class="form-group col-sm">
+                    <label for="rating"> calificar el libro </label>
+                    <select id="rating" name="rating" class="form-control" required>
+                        <option disabled>Calificacion</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                   
+                         <span class="input-group-text"> di algo acerca del libro :v</span>
+                     
+                        </div>
+                        <textarea name="comentario" id="comentario" class="form-control" rows="1" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-sm">
+                    <button class="btn btn-success" type="submit">enviar</button>
+                </div>
+            </div>
+        </form>
+        {%endif%}
+
+       
+        <div id="userReviews">
+            <h2></h2>
+            {% for reseña in reviews %}
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1" style="color:burlywood">{{reseña['username']}} </h6>
+                        <small>{{reseña['time']}}</small>
+                    </div>
+                    <p class="mb-1">{{reseña['comentarios']}}</p>
+                    <small> {{reseña['calificacion']}}</small>
+                </a>
+                <div class="dropdown-divider"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+   
+
+{% endblock %}

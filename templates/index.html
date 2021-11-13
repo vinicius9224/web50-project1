@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    inicio
+{% endblock %}
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+  <div > 
+    <style>
+        .heading { color:white; }
+      </style>
+    <h1 class="heading"> Libros </h1>
+    </div>
+    <form action="/search" method="GET">
+        <div class="form-group">
+            <input type="text" class="form-control mr-sm-2" name="book" autofocus aria-describedby="bookHelp" placeholder="ISBN, Titulo o Autor">
+        </div>
+        <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+  </div>
+
+
+   
+
+
+{% endblock %}

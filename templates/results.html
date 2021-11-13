@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+
+
+<h3>Search Results</h3>
+<div class="dropdown-divider"></div>
+
+<div class="container results-container">
+    
+    {% for book in books %}
+        <div class="card bg-dark text-white" style="width: 14rem">
+            <div class="card-body">
+                <h4 class="card-title">{{book['title']}}</h4>
+                <h6 class="card-text">{{book['author']}}</h6>
+                <h6 class="card-text">{{book['year']}}</h6>
+                <h6 class="card-text">{{book['isbn']}}</h6>
+            </div>
+            <div class="card-body">
+                <a href="book/{{book['isbn']}}" class="card-body"> ir a la pagina del libro</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
